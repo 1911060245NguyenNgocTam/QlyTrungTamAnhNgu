@@ -70,7 +70,7 @@ foreign key (MaKhoaHoc) references dbo.KhoaHoc(MaKhoaHoc),
 go
 
 ---------------Bảng ngày học---------------7
-Create table [NgayHoc]
+/*Create table [NgayHoc]
 (
 	[MaNgayHoc] Varchar(10) NOT NULL,
 	[Thu] Nvarchar(15) NOT NULL,
@@ -79,8 +79,8 @@ Create table [NgayHoc]
 	[GioKetThuc] Nvarchar (10) NOT NULL,
 Primary Key ([MaNgayHoc])
 ) 
+*/
 
-go
 
 
 ---------------Bảng học viên---------------8
@@ -101,25 +101,21 @@ Create table [DiemDanh]
 (
 	[MaLop] Varchar(10) NOT NULL,
 	[MaHocVien] Varchar(10) NOT NULL,
-	[MaNgayHoc] Varchar(10) NOT NULL,
+	[NgayHoc] date not null,
+	[GioBatDau] varchar (10) not null,
+	[GioKetThuc] varchar(10) not null,
+	--[MaNgayHoc] Varchar(10) NOT NULL,
 	[TrangThai] Nvarchar(10) NOT NULL,
---Primary Key ([MaLop],[MaHocVien],[MaNgayHoc]),
+--Primary Key ([MaLop],[MaHocVien]
 foreign key (MaLop) references dbo.Lop(MaLop),
-foreign key (MaHocVien) references dbo.HocVien(MaHocVien),
-foreign key (MaNgayHoc) references dbo.NgayHoc(MaNgayHoc),	
+foreign key (MaHocVien) references dbo.HocVien(MaHocVien),	
 ) 
+
 go
 
 
 ---------------Bảng chi tiết học viên---------------10
-Create table [ChiTietHocVien]
-(
-	[MaLop] Varchar(10) NOT NULL,
-	[MaHocVien] Varchar(10) NOT NULL,
-foreign key (MaLop) references dbo.Lop(MaLop),
-foreign key (MaHocVien) references dbo.HocVien(MaHocVien),
-) 
-go
+
 
 
 ---------------Bảng thi xét lớp---------------11
@@ -244,7 +240,7 @@ VALUES ('L4','KH4',N'Lớp INC1','2019-3-1','2020-3-1')
 select *from LOP
 
 -------------------NGÀY HỌC-------------------
-INSERT NGAYHOC
+/*INSERT NGAYHOC
 VALUES ('NH1', N'Thứ 3','2019-7-14',N'6pm',N'9pm')
 INSERT NGAYHOC
 VALUES ('NH2', N'Thứ 5','2019-7-16',N'9am',N'11am')
@@ -252,7 +248,7 @@ INSERT NGAYHOC
 VALUES ('NH3', N'Thứ 4','2019-7-15',N'6pm',N'9pm')
 
 select *from NGAYHOC
-
+*/
 -------------------HỌC VIÊN-------------------
 INSERT HOCVIEN
 VALUES ('HV1',N'Trần Kiên','2001-9-1',N'11, Phan Văn Hớn, Quận 12, TPHCM', N'0903982094')
@@ -280,26 +276,15 @@ select *from HOCVIEN
 
 -------------------ĐIỂM DANH-------------------
 INSERT DIEMDANH
-VALUES ('L1','HV1','NH1',N'Có')
+VALUES ('L1','HV1','2021-2-19', '7pm','9pm', N'Có')
 INSERT DIEMDANH
-VALUES ('L1','HV2','NH1',N'Vắng')
+VALUES ('L2','HV2','2021-3-2','6pm','8pm',N'Vắng')
 INSERT DIEMDANH
-VALUES ('L1','HV3','NH1',N'Vắng')
+VALUES ('L3','HV3','2021-5-21','8am','9am',N'Vắng')
 
 select *from DIEMDANH 
 
 
--------------------CHI TIẾT HỌC VIÊN------------------
-INSERT CHITIETHOCVIEN
-VALUES ('L1','HV1')
-INSERT CHITIETHOCVIEN
-VALUES ('L2','HV3')
-INSERT CHITIETHOCVIEN
-VALUES ('L1','HV2')
-INSERT CHITIETHOCVIEN
-VALUES ('L2','HV4')
-
-select *from CHITIETHOCVIEN
 
 
 -------------------THI XÉT LỚP------------------
@@ -309,6 +294,18 @@ INSERT THIXETLOP
 VALUES ('KT2','2019-2-5',N'5pm',N'6pm','TNC1')
 INSERT THIXETLOP
 VALUES ('KT3','2019-2-6',N'5pm',N'6pm','I1')
+INSERT THIXETLOP
+VALUES ('KT4','2019-5-7',N'5pm',N'6pm','I1')
+INSERT THIXETLOP
+VALUES ('KT5','2020-1-4',N'3pm',N'5pm','TNC1')
+INSERT THIXETLOP
+VALUES ('KT6','2021-1-9',N'5pm',N'7pm','I1')
+INSERT THIXETLOP
+VALUES ('KT7','2020-7-5',N'4pm',N'5pm','TNC1')
+INSERT THIXETLOP
+VALUES ('KT8','2022-2-6',N'6pm',N'7pm','I1')
+INSERT THIXETLOP
+VALUES ('KT9','2020-6-6',N'2pm',N'3pm','I1')
 
 select *from ThiXetLop
 
@@ -355,7 +352,7 @@ INSERT HOADON
 VALUES ('HD4','HP4','HV4','6000000','2022-4-4',N'Momo',N'Đã đóng')
 INSERT HOADON
 VALUES ('HD5','HP5','HV5','4000000','2020-8-15',N'Tiền mặt',N'Đã đóng')
-delete HoaDon
+
 select *from HOADON
 
 
